@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://cjfw6bbnmb22i"]
+
+[ext_resource type="Script" uid="uid://cby7sc1nyssx" path="res://tetris.gd" id="1_pjvec"]
+
+[node name="Tetris" type="Node2D" unique_id=616414139]
+script = ExtResource("1_pjvec")
+
+[node name="Block" type="ColorRect" parent="." unique_id=1784455507]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="FallTimer" type="Timer" parent="." unique_id=1451989616]
