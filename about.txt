@@ -1,0 +1,5 @@
+The classic falling-block puzzle game everyone loves, with memory tests built in.
+
+The game is inspired by research suggesting that performing spatial and memory-based tasks can lead to a reduction in stress or intrusive thoughts. Play this game to unwind and decompress while enjoying the mental challenges.
+
+DISCLAIMER: This app is intended for relaxation and general wellness purposes only. It is not a substitute for professional medical treatment, and it does not provide medical diagnoses or therapy. Results may vary, and no improvement is guaranteed.
