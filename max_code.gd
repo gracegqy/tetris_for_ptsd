@@ -54,7 +54,12 @@ const COLS: int = 10
 const ROWS: int = 20
 
 const START_POSITION: Vector2i + Vector2i(5, 1)
+const movement_directions: Array[Vector2i] + [Vector2i.LEFT, Vector2i.DOWN, Vector2i.RIGHT]
 var current_position: Vector2i
+
+var fall_timer: float = 0
+var fall_interval: float = 1.0
+var fast_fall_multiplier: float = 10.0
 
 var current_tetromino_type: Array
 var next_tetromino_type: Array
@@ -93,3 +98,24 @@ func initialize_tetromino() -> void:
 func render_tetromino(tetromino: Array, position: Vector2i, atlas: Vector2i) -> void:
   for block in tetromino:
     board_layer.set_cell(position + block, tile_id, atlas)
+
+func physics_prcoess(delta: float) -> void:
+    var move_direction = Vector2i.ZERO
+    if Input.is_action_just_pressed("ui_left"):
+        move_direction = Vector2i.LEFT
+    elif Input.is_action_just_pressed("ui_right"):
+
+    if move_direction != Vector2i.ZERO:
+        move_tetromino(move_direction)
+
+    if Input.is_action_just_pressed("ui_up"):
+        rotate_tetromino()
+
+    var current_fall_interval = fall.interval
+    if Input.is_action_pressed("ui_down")
+        current_fall_interval /= fast_fall_multiplier
+
+    fall_timer += delta
+    if fall_timer >= current_fall_interval:
+        move_tetromino(Vector2i.DOWN)
+        fall_timer = 0
