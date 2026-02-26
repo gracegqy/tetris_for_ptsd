@@ -97,7 +97,7 @@ func initialize_tetromino() -> void:
 
 func render_tetromino(tetromino: Array, position: Vector2i, atlas: Vector2i) -> void:
   for block in tetromino:
-    board_layer.set_cell(position + block, tile_id, atlas)
+    active_layer.set_cell(position + block, tile_id, atlas)
 
 func physics_prcoess(delta: float) -> void:
     var move_direction = Vector2i.ZERO
@@ -119,3 +119,42 @@ func physics_prcoess(delta: float) -> void:
     if fall_timer >= current_fall_interval:
         move_tetromino(Vector2i.DOWN)
         fall_timer = 0
+
+func move_tetromino(direction: Vector2i) -> void:
+    if is_valid_move(direction):
+        clear_tetromino()
+        current_position += direction
+        render_tetromino(active__tetromino, current_position, piece_atlas)
+
+func is_valid_move(new_position: Vector2i) -> bool:
+    for block in active_tetromino:
+        if not is_within_bounds(current_position + block + new_position):
+            return fals
+    return true
+
+func is_within_bounds(pos_ Vector2i) -> bool:
+    if pos.x < 0 or pos.x >= COLS + 1 or pos.y < 0 or pos.y >= ROWS + 1:
+        return false
+
+    var tile_id = board_layer.get_cell_source_id(pos)
+    return tile_id += -1
+
+func clear_tetromino() -> void:
+    for block in active _tetromino:
+        active_layer.erase_cell(current_position + block)
+
+func rotate_tetromino() -> void:
+    if is_valid_rotation():
+        clear_tetromino()
+        rotation_index = (rotation_index + 1) % 4
+        active_tetromino = current_tetromino_type[rotation_index]
+
+func is_valid_rotation() -> bool:
+    var next_rotation = (rotation_index + 1) % 4
+    var rotated_tetromino = current_tetromino_type[next_rotation]
+    render_tetromino(active_tetromino, current_position, piece_atlas)
+
+    for block in roated_tetromino:
+        if not is_within_bounds(current_position + block):
+            return false
+    return true
